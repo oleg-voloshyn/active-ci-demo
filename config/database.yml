@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  timeout: 5000
+  pool: 5
+
+development:
+  <<: *default
+  database: ci_dev
+  username: postgres
+  password: postgres
+  port: 5432
+
+test:
+  <<: *default
+  database: ci_test
+  username: postgres
+  password: postgres
+  port: 5432
