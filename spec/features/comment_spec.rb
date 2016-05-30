@@ -8,21 +8,27 @@ feature 'Comment' do
     expect(page).to have_content('Listing Comments')
   end
 
-  scenario 'Create new comment' do
+  scenario 'Comment validations' do
     comments_page.open
     click_link 'New Comment'
-    expect(page).to have_content('New Comment')
     find_button('Create Comment').trigger(:click)
     expect(page).to have_content('2 errors prohibited this comment from being saved')
     fill_in 'Name', with: 'Oleh'
     find_button('Create Comment').trigger(:click)
     expect(page).to have_content("Body can't be blank")
+  end
+
+  scenario 'Create comment' do
+    comments_page.open
+    click_link 'New Comment'
+    expect(page).to have_content('New Comment')
+    fill_in 'Name', with: 'Oleh'
     fill_in 'Body', with: 'Hello all'
     find_button('Create Comment').trigger(:click)
     expect(page).to have_content('Comment was successfully created.')
   end
 
-  scenario 'Update comment' do
+  scenario 'Update Comment' do
     comments_page.open
     expect(page).to have_content('Oleh')
     click_link 'Edit'
