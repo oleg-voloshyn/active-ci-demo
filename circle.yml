@@ -1,0 +1,10 @@
+test:
+  post:
+    - bundle exec rubocop
+deployment:
+  production:
+    branch: master
+    commands:
+      - git push git@heroku.com:active-ci-demo.git $CIRCLE_SHA1:master -f
+      - heroku run rake db:migrate --app active-ci-demo
+      - heroku restart --app active-ci-demo
